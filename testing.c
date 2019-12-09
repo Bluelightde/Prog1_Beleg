@@ -2,22 +2,15 @@
 
 int main() {
 
-    char adrName[50];
-    char adrStrasse[100];
-    char adrPlz[10];
-    char adrStadt[50];
+    int Variable = 5;
+	int *Zeiger_Variable;
 
+	Variable = &Zeiger_Variable;
+	
+	printf("a ist %d\n", Variable);
+	printf("b ist %d\n", *Zeiger_Variable);
 
-	printf("Hello World\n");
-
-    struct adresse {
-	char name[50];
-	char strasse[100];
-	short hausnummer;
-	long plz;
-	char stadt[50];
-    };
-
+	
 	return 0;
 }
 
