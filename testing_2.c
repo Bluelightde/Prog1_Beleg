@@ -14,7 +14,7 @@ int main(){
 
     zahl3 = zahl1 * zahl2;
 
-    printf("%d", zahl3);
+    printf("%d ist die Zahl!", zahl3);
 
 return 0;
 
