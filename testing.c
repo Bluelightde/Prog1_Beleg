@@ -1,24 +1,11 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <time.h>
+#include <stdint.h>
+ 
+int main(void)
+{
+    time_t epoch = 0;
+    printf("%jd seconds since the epoch began\n", (intmax_t)epoch);
+    printf("%s", asctime(gmtime(&epoch)));
 
-int main() {
-
-    char adrName[50];
-    char adrStrasse[100];
-    char adrPlz[10];
-    char adrStadt[50];
-
-
-	printf("Hello World\n");
-
-    struct adresse {
-	char name[50];
-	char strasse[100];
-	short hausnummer;
-	long plz;
-	char stadt[50];
-    };
-
-	return 0;
 }
-
-
