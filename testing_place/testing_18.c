@@ -7,13 +7,18 @@ int main(){
     int * pAge = &age;
     double gpa = 3.4;
     double * pGpa = & gpa;
-    char grade = "A";
+    char grade = 'A';
     char * pGrade = &grade;
       
     
-    
+    printf("%d\n", *pAge);
+
+    FILE *fpointer = fopen("employees.txt", "a");
+
+    fprintf(fpointer, "\nHello World");
 
 
+    fclose(fpointer);
 
 
     return 0;
