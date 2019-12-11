@@ -3,13 +3,13 @@
 
 int main(){
 
-    int array [5];
+    int age = 5;
+    double gpa = 3.2;
+    char name[3] = "tom";
 
-    char string_array[10];
-
-    char hallo[] = {"Hallo Welt!\n"};
-
-    printf("%s", hallo);
+    printf("age: \t%p\n", &age);
+    printf("gpa: \t%p\n", &gpa);
+    printf("name: \t%p\n", &name);
 
     return 0;
 }

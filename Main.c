@@ -9,6 +9,9 @@ int main() {
 		char Knr[5];
 		char Kennz[2];
 		char Art[12];
+		time_t Ausgabe[20];
+		
+
 
 	};
 	
