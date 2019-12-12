@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 struct Student{
         char name[50];
@@ -18,10 +19,21 @@ int main(){
     strcpy( student1.name, "Jim");
     strcpy( student1.major, "Business");
 
-    printf("%f", student1.gpa);
-    printf("%s", student1.name);
-    printf("%s", student1.major);
-    printf("%d", student1.age);
+    struct Student student2;
+    student2.age = 20;
+    student2.gpa = 3.5;
+    strcpy( student2.name, "Pam");
+    strcpy( student2.major, "Art");
+
+    printf("%f\n", student1.gpa);
+    printf("%s\n", student1.name);
+    printf("%s\n", student1.major);
+    printf("%d\n", student1.age);
+
+    printf("%f\n", student2.gpa);
+    printf("%s\n", student2.name);
+    printf("%s\n", student2.major);
+    printf("%d\n", student2.age);
     
     
 
