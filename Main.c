@@ -49,11 +49,9 @@ int reservierung(){
 	{
 		exit(0);
 	}
-	
-
-	
-
 }
+
+
 
 //int räder(anzahlRäder){
 
@@ -65,6 +63,7 @@ int main() {
 
 	int anzahlRäder = 2;
 	int auswahl;
+	int eingabe_Menu;
 
 	while (1){
 	
@@ -74,9 +73,11 @@ int main() {
 		printf("Stonierung\t - \t2\n");
 		printf("Ausgabe\t\t - \t3\n");
 		printf("Rücknahme\t - \t4\n");
-		printf("Beenden\t\t - \t5\n\n");
+		printf("Einstellungen\t - \t5\n\n");
+		printf("Beenden\t\t - \t6\n\n");
 		printf("Treffen Sie eine Auswahl:\n\n");
 		scanf("%d", &auswahl);
+		printf("\n");
 
 	
 
@@ -96,10 +97,42 @@ int main() {
 		else if (auswahl == 4){
 			/* code */
 		}
-	
 		else if (auswahl == 5){
+			printf("Anzahl Räder: %d\n\n", anzahlRäder);
+			printf("Möchten Sie die Anzal der Räder andern? Ja/Nein 1/2");
+			scanf("%d", &auswahl);
+			if(auswahl == 1){
+				printf("Wie viele Fahrräder sind Vorhanden?");
+				scanf("%d", &anzahlRäder);
+				printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
+				scanf("%d", &eingabe_Menu);
+				if (eingabe_Menu == 1){
+
+			}
+			else{
+				exit(0);
+			}
+
+			}
+			
+		}
+		
+
+		else if (auswahl == 6){
 			exit(0);
 		}
+		else{
+			printf("Fehlerhafte Eingabe!\n\n");
+			printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
+			scanf("%d", &eingabe_Menu);
+			if (eingabe_Menu == 1){
+
+			}
+			else{
+				exit(0);
+			}
+		}
+		
 	}
 		return 0;
 }
