@@ -20,23 +20,38 @@ struct verleih *firstVerleih;
 struct verleih *currentVerleih;
 
 //Funktionen
+int reservierung_Anfang(int count){
+	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
+	firstVerleih = newVerleih;
+	currentVerleih = firstVerleih;
+	count++;
+	return count;
+
+} 
+
+int reservierung_Normal(){
+	printf("Test\n\n");
+	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
+	printf("Test\n\n");
+	currentVerleih->nextVerleih = newVerleih;
+	
+	currentVerleih = currentVerleih->nextVerleih;
+	
+	return 0;
+
+} 
+
 int reservierung(int aus_räder, int ges_räder){
 
 	if(aus_räder < ges_räder){
 
 		int eingabe;
 	
-		newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
-		firstVerleih = newVerleih;
-		currentVerleih = firstVerleih;
-
 		printf("\n--Reservierung--\n\n");
 		puts("Kundennummer:");
 		scanf("%s", currentVerleih->Knr);
 		puts("Rechnungsnummer:");
 		scanf("%s", currentVerleih->Rnr);
-		currentVerleih->nextVerleih=newVerleih;
-		currentVerleih = currentVerleih->nextVerleih;
 		currentVerleih->nextVerleih = NULL;
 
 		printf("--------------\n\n");
@@ -44,7 +59,7 @@ int reservierung(int aus_räder, int ges_räder){
 		printf("---------------------------------------------------------------------\n\n");
 		currentVerleih = firstVerleih;
 
-		while (currentVerleih){
+		while (currentVerleih != NULL){
 		
 		printf("%s\t\t%s\n\n",currentVerleih->Knr, currentVerleih->Rnr);
 		currentVerleih = currentVerleih->nextVerleih;
@@ -83,23 +98,18 @@ int Ansicht(){
 	return 0;
 }
 
-int zeiger(int i){
-
-	for (i = 0; i < 1; i++){
-		
-	}
-}
-
 int main() {
 
 	int anzahlRäder = 2;
 	int eingabe_Menu;
 	int ausge_Räder = 0;
-	int count = 1;
+	int count = 0;
 
 	while (1){
 	
 		printf("\nHerzilch Willkomen im Fahrradverleih!\n\n");
+
+		printf("%d\n\n", count);
 
 		printf("Reservierung\t - \t1\n");
 		printf("Stonierung\t - \t2\n");
@@ -113,8 +123,14 @@ int main() {
 		printf("\n");
 
 		if (eingabe_Menu == 1){
+			if(count == 0){
+				count = reservierung_Anfang(count);
+			}
+			else{
+				reservierung_Normal();
+			}
+			
 			ausge_Räder = reservierung(ausge_Räder, anzahlRäder);
-			count = zeiger(count);
 		}
 		else if (eingabe_Menu == 2){
 			/* code */
@@ -141,9 +157,9 @@ int main() {
 				scanf("%d", &eingabe_Menu);
 				if (eingabe_Menu == 1){
 				}
-			}
-			else{
-				exit(0);
+				else{
+					exit(0);
+				}
 			}
 		}
 
