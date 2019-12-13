@@ -20,7 +20,26 @@ struct verleih *firstVerleih;
 struct verleih *currentVerleih;
 
 //Funktionen
+int reservierung(){
+	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
+	firstVerleih = newVerleih;
+	currentVerleih = firstVerleih;
 
+	printf("\n--Reservierung--\n\n");
+	puts("Kundennummer:");
+	scanf("%s", currentVerleih->Knr);
+	puts("Rechnungsnummer:");
+	scanf("%s", currentVerleih->Rnr);
+	currentVerleih->nextVerleih=NULL;
+
+	printf("--------------\n\n");
+	printf("Kundennummer\tRechnungsnummer\n");
+	printf("---------------------------------------------------------------------\n\n");
+	printf("%s\t\t%s\n",currentVerleih->Knr, currentVerleih->Rnr);
+
+	return 0;
+
+}
 
 //int räder(anzahlRäder){
 
@@ -31,6 +50,7 @@ struct verleih *currentVerleih;
 int main() {
 
 	int anzahlRäder = 2;
+	int auswahl;
 	
 	printf("\nHerzilch Willkomen im Fahrradverleih!\n\n");
 
@@ -39,28 +59,28 @@ int main() {
 	printf("Ausgabe\t\t - \t3\n");
 	printf("Rücknahme\t - \t4\n\n");
 	printf("Treffen Sie eine Auswahl:\n\n");
-	
-	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
-
-	firstVerleih = newVerleih;
-	currentVerleih = firstVerleih;
-
-	puts("Kundennummer:");
-	scanf("%s", currentVerleih->Knr);
-	puts("Rechnungsnummer:");
-	scanf("%s", currentVerleih->Rnr);
-
-	currentVerleih->nextVerleih=NULL;
-
-	printf("--------------\n");
-	printf("Kundennummer: %s \n", currentVerleih->Knr);
-	printf("Rechnungsnummer: %s \n", currentVerleih->Rnr);
+	scanf("%d", &auswahl);
 
 	
 
+	if (auswahl == 1){
 
-	
-	return 0;
+		reservierung();
+
+	}
+	else if (auswahl ==2)
+	{
+		/* code */
+	}
+	else if (auswahl ==3)
+	{
+		/* code */
+	}
+	else
+	{
+		
+	}
+		return 0;
 }
 
 //Hallo
