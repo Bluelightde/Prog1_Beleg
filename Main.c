@@ -20,35 +20,47 @@ struct verleih *firstVerleih;
 struct verleih *currentVerleih;
 
 //Funktionen
-int reservierung(){
+int reservierung(int aus_räder, int ges_räder){
 
-	int eingabe;
+	if(aus_räder < ges_räder){
 
-	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
-	firstVerleih = newVerleih;
-	currentVerleih = firstVerleih;
+		int eingabe;
+	
 
-	printf("\n--Reservierung--\n\n");
-	puts("Kundennummer:");
-	scanf("%s", currentVerleih->Knr);
-	puts("Rechnungsnummer:");
-	scanf("%s", currentVerleih->Rnr);
-	currentVerleih->nextVerleih=NULL;
+		newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
+		firstVerleih = newVerleih;
+		currentVerleih = firstVerleih;
 
-	printf("--------------\n\n");
-	printf("Kundennummer\tRechnungsnummer\n");
-	printf("---------------------------------------------------------------------\n\n");
-	printf("%s\t\t%s\n\n",currentVerleih->Knr, currentVerleih->Rnr);
-	printf("Reservierung erfolgreich!\n\n");
-	printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
-	scanf("%d", &eingabe);
-	if (eingabe == 1){
+		printf("\n--Reservierung--\n\n");
+		puts("Kundennummer:");
+		scanf("%s", currentVerleih->Knr);
+		puts("Rechnungsnummer:");
+		scanf("%s", currentVerleih->Rnr);
+		currentVerleih->nextVerleih=NULL;
+
+		printf("--------------\n\n");
+		printf("Kundennummer\tRechnungsnummer\n");
+		printf("---------------------------------------------------------------------\n\n");
+		printf("%s\t\t%s\n\n",currentVerleih->Knr, currentVerleih->Rnr);
+		printf("%d\n", aus_räder);
+		aus_räder++;
+
+		printf("Reservierung erfolgreich!\n\n");
+		printf("Ausgeliehende Räder: %d/%d\n\n", aus_räder, ges_räder);
+		printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
+		scanf("%d", &eingabe);
+			if (eingabe == 1){
+				return aus_räder;
+			}
+			else{
+				exit(0);
+			}
+	}
+	else{
+		printf("Es sind keine Räder mehr verfügbar.\n\n");
 		return 0;
 	}
-	else
-	{
-		exit(0);
-	}
+	
 }
 
 
@@ -62,8 +74,8 @@ int reservierung(){
 int main() {
 
 	int anzahlRäder = 2;
-	int auswahl;
 	int eingabe_Menu;
+	int ausge_Räder = 0;
 
 	while (1){
 	
@@ -76,34 +88,34 @@ int main() {
 		printf("Einstellungen\t - \t5\n\n");
 		printf("Beenden\t\t - \t6\n\n");
 		printf("Treffen Sie eine Auswahl:\n\n");
-		scanf("%d", &auswahl);
+		scanf("%d", &eingabe_Menu);
 		printf("\n");
 
 	
 
 
-		if (auswahl == 1){
+		if (eingabe_Menu == 1){
 
-			reservierung();
-		
+			ausge_Räder = reservierung(ausge_Räder, anzahlRäder);
 
 		}
-		else if (auswahl == 2){
+		else if (eingabe_Menu == 2){
 			/* code */
 		}
-		else if (auswahl == 3){
+		else if (eingabe_Menu == 3){
 			/* code */
 		}
-		else if (auswahl == 4){
+		else if (eingabe_Menu == 4){
 			/* code */
 		}
-		else if (auswahl == 5){
+		else if (eingabe_Menu == 5){
 			printf("Anzahl Räder: %d\n\n", anzahlRäder);
 			printf("Möchten Sie die Anzal der Räder andern? Ja/Nein 1/2");
-			scanf("%d", &auswahl);
-			if(auswahl == 1){
+			scanf("%d", &eingabe_Menu);
+			if(eingabe_Menu == 1){
 				printf("Wie viele Fahrräder sind Vorhanden?");
 				scanf("%d", &anzahlRäder);
+				//ergänzen
 				printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
 				scanf("%d", &eingabe_Menu);
 				if (eingabe_Menu == 1){
@@ -118,7 +130,7 @@ int main() {
 		}
 		
 
-		else if (auswahl == 6){
+		else if (eingabe_Menu == 6){
 			exit(0);
 		}
 		else{
