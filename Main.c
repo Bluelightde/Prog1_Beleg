@@ -33,12 +33,10 @@ int reservierung_Normal(){
 	printf("Test\n\n");
 	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
 	printf("Test\n\n");
-	currentVerleih->nextVerleih = newVerleih;
-	
-	currentVerleih = currentVerleih->nextVerleih;
-	
-	return 0;
 
+	currentVerleih->nextVerleih = newVerleih;
+	currentVerleih = currentVerleih->nextVerleih;
+	return 0;
 } 
 
 int reservierung(int aus_rad, int ges_rad){
