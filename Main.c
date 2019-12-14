@@ -103,7 +103,7 @@ int einstellungen(int anzahlRad, int eingabe_Menu){
 	return 0;
 }
 
-int Ansicht(int eingabe_Menu){
+int ansicht(int eingabe_Menu){
 	currentVerleih = firstVerleih;
 	printf("--------------\n\n");
 		printf("Kundennummer\tRechnungsnummer\n");
@@ -123,6 +123,19 @@ int Ansicht(int eingabe_Menu){
 			exit(0);
 		}
 
+	return 0;
+}
+
+int fehler(int eingabe_Menu){
+	printf("Fehlerhafte Eingabe!\n\n");
+	printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
+		scanf("%d", &eingabe_Menu);
+		if (eingabe_Menu == 1){
+			return 0;
+		}
+		else{
+			exit(0);
+		}
 	return 0;
 }
 
@@ -170,7 +183,7 @@ int main() {
 			/* code */
 		}
 		else if (eingabe_Menu == 5){
-			Ansicht(eingabe_Menu);
+			ansicht(eingabe_Menu);
 		}
 
 		else if (eingabe_Menu == 6){
@@ -181,15 +194,7 @@ int main() {
 			exit(0);
 		}
 		else{
-			printf("Fehlerhafte Eingabe!\n\n");
-			printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
-			scanf("%d", &eingabe_Menu);
-			if (eingabe_Menu == 1){
-
-			}
-			else{
-				exit(0);
-			}
+			fehler(eingabe_Menu);
 		}
 		
 	}
