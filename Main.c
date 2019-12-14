@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdint.h>
 
-struct fahrräder{
+struct rad{
 		char Kennz[2];
 		char Art[12];
 		//char Reservierung[];
@@ -41,9 +41,9 @@ int reservierung_Normal(){
 
 } 
 
-int reservierung(int aus_räder, int ges_räder){
+int reservierung(int aus_rad, int ges_rad){
 
-	if(aus_räder < ges_räder){
+	if(aus_rad < ges_rad){
 
 		int eingabe;
 	
@@ -64,14 +64,14 @@ int reservierung(int aus_räder, int ges_räder){
 		printf("%s\t\t%s\n\n",currentVerleih->Knr, currentVerleih->Rnr);
 		currentVerleih = currentVerleih->nextVerleih;
 		}
-		aus_räder++;
+		aus_rad++;
 
 		printf("Reservierung erfolgreich!\n\n");
-		printf("Ausgeliehende Räder: %d/%d\n\n", aus_räder, ges_räder);
+		printf("Ausgeliehende Räder: %d/%d\n\n", aus_rad, ges_rad);
 		printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
 		scanf("%d", &eingabe);
 			if (eingabe == 1){
-				return aus_räder;
+				return aus_rad;
 			}
 			else{
 				exit(0);
@@ -100,9 +100,9 @@ int Ansicht(){
 
 int main() {
 
-	int anzahlRäder = 2;
+	int anzahlRad = 2;
 	int eingabe_Menu;
-	int ausge_Räder = 0;
+	int ausge_Rad = 0;
 	int count = 0;
 
 	while (1){
@@ -130,7 +130,7 @@ int main() {
 				reservierung_Normal();
 			}
 			
-			ausge_Räder = reservierung(ausge_Räder, anzahlRäder);
+			ausge_Rad = reservierung(ausge_Rad, anzahlRad);
 		}
 		else if (eingabe_Menu == 2){
 			/* code */
@@ -146,12 +146,12 @@ int main() {
 		}
 
 		else if (eingabe_Menu == 6){
-			printf("Anzahl Räder: %d\n\n", anzahlRäder);
+			printf("Anzahl Räder: %d\n\n", anzahlRad);
 			printf("Möchten Sie die Anzal der Räder andern? Ja/Nein 1/2");
 			scanf("%d", &eingabe_Menu);
 			if(eingabe_Menu == 1){
 				printf("Wie viele Fahrräder sind Vorhanden?");
-				scanf("%d", &anzahlRäder);
+				scanf("%d", &anzahlRad);
 				//ergänzen
 				printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
 				scanf("%d", &eingabe_Menu);
