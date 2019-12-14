@@ -84,7 +84,26 @@ int reservierung(int aus_rad, int ges_rad){
 	}
 }
 
-int Ansicht(){
+int einstellungen(int anzahlRad, int eingabe_Menu){
+	printf("Anzahl Räder: %d\n\n", anzahlRad);
+	printf("Möchten Sie die Anzal der Räder andern? Ja/Nein 1/2");
+	scanf("%d", &eingabe_Menu);
+	if(eingabe_Menu == 1){
+		printf("Wie viele Fahrräder sind Vorhanden?");
+		scanf("%d", &anzahlRad);
+		printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
+		scanf("%d", &eingabe_Menu);
+		if (eingabe_Menu == 1){
+			return anzahlRad;
+		}
+		else{
+			exit(0);
+		}
+	}
+	return 0;
+}
+
+int Ansicht(int eingabe_Menu){
 	currentVerleih = firstVerleih;
 	printf("--------------\n\n");
 		printf("Kundennummer\tRechnungsnummer\n");
@@ -95,6 +114,15 @@ int Ansicht(){
 		printf("%s\t\t%s\n\n",currentVerleih->Knr, currentVerleih->Rnr);
 		currentVerleih = currentVerleih->nextVerleih;
 	}
+	printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
+		scanf("%d", &eingabe_Menu);
+		if (eingabe_Menu == 1){
+			return 0;
+		}
+		else{
+			exit(0);
+		}
+
 	return 0;
 }
 
@@ -115,7 +143,7 @@ int main() {
 		printf("Stonierung\t - \t2\n");
 		printf("Ausgabe\t\t - \t3\n");
 		printf("Rücknahme\t - \t4\n");
-		printf("Übersicht:\t - \t5\n");
+		printf("Ansicht:\t - \t5\n");
 		printf("Einstellungen\t - \t6\n\n");
 		printf("Beenden\t\t - \t7\n\n");
 		printf("Treffen Sie eine Auswahl:\n\n");
@@ -142,25 +170,11 @@ int main() {
 			/* code */
 		}
 		else if (eingabe_Menu == 5){
-			Ansicht();
+			Ansicht(eingabe_Menu);
 		}
 
 		else if (eingabe_Menu == 6){
-			printf("Anzahl Räder: %d\n\n", anzahlRad);
-			printf("Möchten Sie die Anzal der Räder andern? Ja/Nein 1/2");
-			scanf("%d", &eingabe_Menu);
-			if(eingabe_Menu == 1){
-				printf("Wie viele Fahrräder sind Vorhanden?");
-				scanf("%d", &anzahlRad);
-				//ergänzen
-				printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
-				scanf("%d", &eingabe_Menu);
-				if (eingabe_Menu == 1){
-				}
-				else{
-					exit(0);
-				}
-			}
+			anzahlRad = einstellungen(anzahlRad, eingabe_Menu);
 		}
 
 		else if (eingabe_Menu == 7){
