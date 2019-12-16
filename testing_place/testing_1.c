@@ -1,17 +1,29 @@
 #include<stdio.h>
+#include<stdlib.h>
 
-int main() {
+int main(int argc, const char * argv[]) {
+    char choice[10];
 
-    int Variable = 5;
-	int *Zeiger_Variable;
+    float v;
+    float i;
+    float r;
 
-	Variable = &Zeiger_Variable;
-	
-	printf("a ist %d\n", Variable);
-	printf("b ist %d\n", *Zeiger_Variable);
+    printf("What would you like to calculate?: ");
+    scanf("%9s", &choice); /* this specifier prevents overruns */
+    printf("\nYou chose: \n""%s", choice);
 
-	
-	return 0;
+    if (strcmp(choice, "r") == 0)
+    { 
+        printf("\nPlease enter voltage (V): \n");
+        scanf("%f", &v); /* use a pointer to the original memory */
+
+        printf("\nPlease enter current (I): \n");
+        scanf("%f", &i); /* use a pointer to the original memory */
+
+        r = v/i;
+
+        printf("%f", r);
+    }
 }
 
 

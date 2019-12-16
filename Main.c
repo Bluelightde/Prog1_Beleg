@@ -1,85 +1,68 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include <time.h>
-#include <stdint.h>
+
+
 
 struct rad{
-		char Kennz[2];
+		
 		char Art[12];
+
+		struct rad* nextVerleih;
 		//char Reservierung[];
 	};
 
 struct verleih{
 		char Knr[5];
 		char Rnr[5];
-		struct verleih * nextVerleih; 
+		char Kennz[2];
+		int Ausgabe[5];
+		int Rueckgabe[5];
+		
+		struct verleih* nextVerleih; 
 };
 
-struct verleih *newVerleih;
-struct verleih *firstVerleih;
-struct verleih *currentVerleih;
+typedef struct verleih verleih_t;
 
 //Funktionen
-int reservierung_Anfang(int count){
-	newVerleih = (struct verleih*) malloc(sizeof(struct verleih));
-	firstVerleih = newVerleih;
-	currentVerleih = firstVerleih;
-	count++;
-	return count;
-	
-} 
 
-int reservierung_Normal(){
-	printf("Test\n\n");
-	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
-	printf("Test\n\n");
+void printlist(verleih_t *firstVerleih){
+	verleih_t *temporary = firstVerleih;
 
-	currentVerleih->nextVerleih = newVerleih;
-	currentVerleih = currentVerleih->nextVerleih;
-	return 0;
-} 
-
-int reservierung(int aus_rad, int ges_rad){
-
-	if(aus_rad < ges_rad){
-
-		int eingabe;
-	
-		printf("\n--Reservierung--\n\n");
-		puts("Kundennummer:");
-		scanf("%s", currentVerleih->Knr);
-		puts("Rechnungsnummer:");
-		scanf("%s", currentVerleih->Rnr);
-		currentVerleih->nextVerleih = NULL;
-
-		printf("--------------\n\n");
-		printf("Kundennummer\tRechnungsnummer\n");
-		printf("---------------------------------------------------------------------\n\n");
-		currentVerleih = firstVerleih;
-
-		while (currentVerleih != NULL){
+	printf("---------------------------------------------------------------------\n\n");
+	printf("Kundennummer\tRechnungsnummer\tKennzeichen\tAusgabe\tRückgabe\n");
+	printf("---------------------------------------------------------------------\n\n");
 		
-		printf("%s\t\t%s\n\n",currentVerleih->Knr, currentVerleih->Rnr);
-		currentVerleih = currentVerleih->nextVerleih;
-		}
-		aus_rad++;
-
-		printf("Reservierung erfolgreich!\n\n");
-		printf("Ausgeliehende Räder: %d/%d\n\n", aus_rad, ges_rad);
-		printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
-		scanf("%d", &eingabe);
-			if (eingabe == 1){
-				return aus_rad;
-			}
-			else{
-				exit(0);
-			}
+	while (temporary != NULL){
+		printf("%s\t\t%s\t\t%s\t\t%d\t\t%d\n\n",temporary->Knr, temporary->Rnr, temporary->Kennz, temporary->Ausgabe[3], temporary->Rueckgabe[3]);
+		temporary = temporary->nextVerleih;
 	}
+}
 
-	else{
-		printf("Es sind keine Räder mehr verfügbar.\n\n");
-		return 0;
+
+verleih_t *create_new_verleih(int anzahlRad){
+	verleih_t *currentVerleih = malloc(sizeof(verleih_t));
+	puts("Kundennummer:\t");
+	scanf("%s", currentVerleih->Knr);
+	puts("Rechnungsnummer:\t");
+	scanf("%s", currentVerleih->Rnr);
+	puts("Kennzeichen:\t");
+	scanf("%s", currentVerleih->Kennz);
+	puts("Ausgabe Jahr/Monat/Tag/Stunde/Minute\t");
+	for (int i = 0; i < 5; i++){
+		int *Ausgabe = &Ausgabe[i]; 
+		scanf("%d", currentVerleih->Ausgabe);
 	}
+	puts("Rückgabe:\t");
+	for (int i = 0; i < 5; i++){
+		int *Rueckgabe_zeiger = &currentVerleih->Rueckgabe[i];
+		scanf("%d", currentVerleih->Rueckgabe);
+	}
+	printf("%d\n\n", currentVerleih->Ausgabe[1]);
+	currentVerleih->nextVerleih = NULL;
+	
+
+	return currentVerleih;
 }
 
 int einstellungen(int anzahlRad, int eingabe_Menu){
@@ -101,29 +84,6 @@ int einstellungen(int anzahlRad, int eingabe_Menu){
 	return 0;
 }
 
-int ansicht(int eingabe_Menu){
-	currentVerleih = firstVerleih;
-	printf("--------------\n\n");
-		printf("Kundennummer\tRechnungsnummer\n");
-		printf("---------------------------------------------------------------------\n\n");
-
-	while (currentVerleih){
-		
-		printf("%s\t\t%s\n\n",currentVerleih->Knr, currentVerleih->Rnr);
-		currentVerleih = currentVerleih->nextVerleih;
-	}
-	printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
-		scanf("%d", &eingabe_Menu);
-		if (eingabe_Menu == 1){
-			return 0;
-		}
-		else{
-			exit(0);
-		}
-
-	return 0;
-}
-
 int fehler(int eingabe_Menu){
 	printf("Fehlerhafte Eingabe!\n\n");
 	printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
@@ -138,6 +98,8 @@ int fehler(int eingabe_Menu){
 }
 
 int main() {
+	verleih_t *firstVerleih; //head
+	verleih_t *tmp;
 
 	int anzahlRad = 2;
 	int eingabe_Menu;
@@ -145,11 +107,7 @@ int main() {
 	int count = 0;
 
 	while (1){
-	
 		printf("\nHerzilch Willkomen im Fahrradverleih!\n\n");
-
-		printf("%d\n\n", count);
-
 		printf("Reservierung\t - \t1\n");
 		printf("Stonierung\t - \t2\n");
 		printf("Ausgabe\t\t - \t3\n");
@@ -162,15 +120,21 @@ int main() {
 		printf("\n");
 
 		if (eingabe_Menu == 1){
-			if(count == 0){
-				count = reservierung_Anfang(count);
-			}
-			else{
-				reservierung_Normal();
-			}
 			
-			ausge_Rad = reservierung(ausge_Rad, anzahlRad);
+				tmp=create_new_verleih(anzahlRad);
+				tmp->nextVerleih = firstVerleih;
+				firstVerleih = tmp;
+				printf("Reservierung erfolgreich!\n\n");
+				printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
+				scanf("%d", &eingabe_Menu);
+				if (eingabe_Menu == 1){
+					//zurück zum Hauptmenu
+				}
+				else{
+					exit(0);
+				}
 		}
+		
 		else if (eingabe_Menu == 2){
 			/* code */
 		}
@@ -181,9 +145,9 @@ int main() {
 			/* code */
 		}
 		else if (eingabe_Menu == 5){
-			ansicht(eingabe_Menu);
+			printlist(firstVerleih);
+			//ansicht(eingabe_Menu);
 		}
-
 		else if (eingabe_Menu == 6){
 			anzahlRad = einstellungen(anzahlRad, eingabe_Menu);
 		}
@@ -198,4 +162,3 @@ int main() {
 	}
 		return 0;
 }
-
