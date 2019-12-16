@@ -21,12 +21,12 @@ struct verleih *currentVerleih;
 
 //Funktionen
 int reservierung_Anfang(int count){
-	newVerleih = (struct verleih *) malloc(sizeof(struct verleih));
+	newVerleih = (struct verleih*) malloc(sizeof(struct verleih));
 	firstVerleih = newVerleih;
 	currentVerleih = firstVerleih;
 	count++;
 	return count;
-
+	
 } 
 
 int reservierung_Normal(){
