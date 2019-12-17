@@ -7,9 +7,7 @@
 struct rad{
 		
 		char Art[12];
-
 		struct rad* nextVerleih;
-		//char Reservierung[];
 	};
 
 struct verleih{
@@ -18,14 +16,12 @@ struct verleih{
 		char Kennz[2];
 		int Ausgabe[5];
 		int Rueckgabe[5];
-		
 		struct verleih* nextVerleih; 
 };
 
 typedef struct verleih verleih_t;
 
 //Funktionen
-
 void printlist(verleih_t *firstVerleih){
 	verleih_t *temporary = firstVerleih;
 
@@ -39,8 +35,7 @@ void printlist(verleih_t *firstVerleih){
 	}
 }
 
-
-verleih_t *create_new_verleih(int anzahlRad){
+verleih_t *create_new_verleih(){
 	verleih_t *currentVerleih = malloc(sizeof(verleih_t));
 	puts("Kundennummer:\t");
 	scanf("%s", currentVerleih->Knr);
@@ -48,7 +43,7 @@ verleih_t *create_new_verleih(int anzahlRad){
 	scanf("%s", currentVerleih->Rnr);
 	puts("Kennzeichen:\t");
 	scanf("%s", currentVerleih->Kennz);
-	puts("Ausgabe Jahr/Monat/Tag/Stunde/Minute\t");
+	puts("Ausgabe Jahr/Monat/Tag/Stunde/Minute\t"); //Versuch das Datum in die Liste einzulesen
 	for (int i = 0; i < 5; i++){
 		int *Ausgabe = &Ausgabe[i]; 
 		scanf("%d", currentVerleih->Ausgabe);
@@ -61,7 +56,6 @@ verleih_t *create_new_verleih(int anzahlRad){
 	printf("%d\n\n", currentVerleih->Ausgabe[1]);
 	currentVerleih->nextVerleih = NULL;
 	
-
 	return currentVerleih;
 }
 
@@ -121,7 +115,7 @@ int main() {
 
 		if (eingabe_Menu == 1){
 			
-				tmp=create_new_verleih(anzahlRad);
+				tmp=create_new_verleih();
 				tmp->nextVerleih = firstVerleih;
 				firstVerleih = tmp;
 				printf("Reservierung erfolgreich!\n\n");
