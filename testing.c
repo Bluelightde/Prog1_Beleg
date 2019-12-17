@@ -42,6 +42,8 @@ int main(){
 
    printlist(head);
 
+   printf("Test");
+
    return 0;
 
 }
