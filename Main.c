@@ -78,11 +78,11 @@ verleih_t *create_new_verleih(){
 	if(4 == size_year){
 		if (currentVerleih->Ausgabe[0]>2018){
 			if (2 == size_month){
-				printf("Erfolg");
-				printf("Erfolg");
+				printf("Erfolg\n\n");
 			}
 		}
 	}
+
 	else{
 		//fehler = 1;
 		printf("Fehler");
@@ -100,16 +100,7 @@ verleih_t *create_new_verleih(){
 		printlist(currentVerleih);
 		return currentVerleih;
 }
-/*
-int gueltigkeit(verleih_t *datum){
-	int tm_year;
-	t_time->tm_year;
-	for (int i = 0; i<5; i++){
-		
-	}
-	return 0;
-}
-*/
+
 int einstellungen(int anzahlRad, int eingabe_Menu){
 	printf("Anzahl Räder: %d\n\n", anzahlRad);
 	printf("Möchten Sie die Anzal der Räder andern? Ja/Nein 1/2");
