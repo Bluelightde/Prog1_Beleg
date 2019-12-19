@@ -27,9 +27,9 @@ typedef struct verleih verleih_t;
 void printlist(verleih_t *firstVerleih){
 	verleih_t *temporary = firstVerleih;
 
-	printf("---------------------------------------------------------------------\n\n");
-	printf("Kundennummer\tRechnungsnummer\tKennzeichen\tAusgabe\t\tRückgabe\n");
-	printf("---------------------------------------------------------------------\n\n");
+	printf("-----------------------------------------------------------------------------------------------\n\n");
+	printf("Kundennummer\tRechnungsnummer\tKennzeichen\tAusgabe\t\t\tRückgabe\n");
+	printf("-----------------------------------------------------------------------------------------------\n\n");
 		
 	while (temporary != NULL){
 		//printf("Test");
@@ -78,14 +78,13 @@ verleih_t *create_new_verleih(){
 	if(4 == size_year){
 		if (currentVerleih->Ausgabe[0]>2018){
 			if (2 == size_month){
-				printf("Erfolg\n\n");
+				printf("Datum richtig\n\n");
 			}
 		}
 	}
-
 	else{
-		//fehler = 1;
-		printf("Fehler");
+		printf("Fehler\n\n");
+		
 	}	
 	//gueltigkeit(currentVerleih);
 	puts("Rückgabe:\t");
