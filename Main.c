@@ -54,9 +54,12 @@ verleih_t *create_new_verleih(){
 	puts("Kennzeichen:\t");
 	scanf("%s", currentVerleih->Kennz);
 	puts("Ausgabe Jahr/Monat/Tag/Stunde/Minute\t");
+
+	int *ausgabe_Zeiger; 
 	for (int i = 0; i < 4; i++){
-		int *ausgabe_Zeiger = &currentVerleih->Ausgabe[i]; 
+		ausgabe_Zeiger = &currentVerleih->Ausgabe[i]; 
 		scanf("%d\n", ausgabe_Zeiger);
+		printf("%d\n", i);
 	}
 	int size_year_A = log10(currentVerleih->Ausgabe[0])+1;
 	int size_month_A = log10(currentVerleih->Ausgabe[1])+1;
@@ -149,9 +152,12 @@ verleih_t *create_new_verleih(){
 		printf("Das Datum ist fehlerhaft!\n\n");
 		exit (0);
 	}
+
+	int *rueckgabe_Zeiger;
+	
 	puts("Rückgabe:\t");
-	for (int i = 0; i < 6; i++){
-		int *rueckgabe_Zeiger = &currentVerleih->Rueckgabe[i];
+	for (int j = 0; j < 4; j++){
+		rueckgabe_Zeiger = &currentVerleih->Rueckgabe[j];
 		scanf("%d", rueckgabe_Zeiger);
 	}
 	
@@ -240,6 +246,19 @@ verleih_t *create_new_verleih(){
 	}
 	else{
 		printf("Das Datum ist fehlerhaft!\n\n");
+		printf("Fehler\n");
+
+		printf("0:\t%d\n\n",currentVerleih->Ausgabe[0]);
+		printf("1:\t%d\n\n",currentVerleih->Ausgabe[1]);
+		printf("2:\t%d\n\n",currentVerleih->Ausgabe[2]);
+		printf("3:\t%d\n\n",currentVerleih->Ausgabe[3]);
+		printf("4:\t%d\n\n",currentVerleih->Ausgabe[4]);
+
+		printf("0:\t%d\n\n",currentVerleih->Rueckgabe[0]);
+		printf("1:\t%d\n\n",currentVerleih->Rueckgabe[1]);
+		printf("2:\t%d\n\n",currentVerleih->Rueckgabe[2]);
+		printf("3:\t%d\n\n",currentVerleih->Rueckgabe[3]);
+		printf("4:\t%d\n\n",currentVerleih->Rueckgabe[4]);
 		exit (0);
 	}
 
