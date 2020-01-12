@@ -4,21 +4,14 @@
 #include<math.h>
 
 
-/*
-struct rad{
-		
-		char Art[12];
-		struct rad* nextVerleih;
-	};
-*/
 struct verleih{
+		char Kat[1];
 		char Knr[5];
 		char Rnr[5];
 		char Kennz[2];
 		int Ausgabe[5];
 		int Rueckgabe[5];
 		struct verleih* nextVerleih;
-		
 };
 
 typedef struct verleih verleih_t;
@@ -33,25 +26,18 @@ void printlist(verleih_t *firstVerleih){
 		
 	while (temporary != NULL){
 		//printf("Test");
+		
 		if(temporary != NULL){
 			printf("%s\t\t%s\t\t%s\t\t%d-%d-%d %d:%d\t\t%d-%d-%d %d:%d\n\n",temporary->Knr, temporary->Rnr, temporary->Kennz, temporary->Ausgabe[0],temporary->Ausgabe[1],temporary->Ausgabe[2],temporary->Ausgabe[3],temporary->Ausgabe[4] ,temporary->Rueckgabe[0],temporary->Rueckgabe[1],temporary->Rueckgabe[2],temporary->Rueckgabe[3],temporary->Rueckgabe[4]);
 		}
 		//printf("Test");
-		if(temporary != NULL){
+		if(temporary->nextVerleih != NULL){
 			temporary = temporary->nextVerleih;
 		}
-		//printf("Test");
-	}
-}
-
-void datum_pruefen(verleih_t *firstVerleih){
-	verleih_t *temporary = firstVerleih;
-
-	while(temporary != NULL){
-		if (firstVerleih->Kennz == temporary->Kennz){
-			printf("Bestanden");
+		else{
+			
+			return;
 		}
-		temporary = temporary->nextVerleih;
 	}
 }
 
@@ -59,6 +45,8 @@ void datum_pruefen(verleih_t *firstVerleih){
 verleih_t *create_new_verleih(){
 	verleih_t *currentVerleih = malloc(sizeof(verleih_t));
 	int fehler = 0;
+	puts("Kategorie:\t");
+	scanf("%c", currentVerleih->Kat);
 	puts("Kundennummer:\t");
 	scanf("%s", currentVerleih->Knr);
 	puts("Rechnungsnummer:\t");
@@ -70,34 +58,194 @@ verleih_t *create_new_verleih(){
 		int *ausgabe_Zeiger = &currentVerleih->Ausgabe[i]; 
 		scanf("%d\n", ausgabe_Zeiger);
 	}
-	int size_year = log10(currentVerleih->Ausgabe[0])+1;
-	int size_month = log10(currentVerleih->Ausgabe[1])+1;
-	int size_day = log10(currentVerleih->Ausgabe[2])+1;
-	int size_hour = log10(currentVerleih->Ausgabe[3])+1;
-	int size_min = log10(currentVerleih->Ausgabe[4])+1;
-	if(4 == size_year){
-		if (currentVerleih->Ausgabe[0]>2018){
-			if (2 == size_month){
-				printf("Datum richtig\n\n");
+	int size_year_A = log10(currentVerleih->Ausgabe[0])+1;
+	int size_month_A = log10(currentVerleih->Ausgabe[1])+1;
+	int size_day_A = log10(currentVerleih->Ausgabe[2])+1;
+	int size_hour_A = log10(currentVerleih->Ausgabe[3])+1;
+	int size_min_A = log10(currentVerleih->Ausgabe[4])+1;
+	if(4 == size_year_A){
+		if (currentVerleih->Ausgabe[0]>2019){
+			if (3 > size_month_A){
+				if(currentVerleih->Ausgabe[1]< 13){	
+					if (currentVerleih->Ausgabe[1] > 0){
+						if (size_day_A > 0){
+							if(size_day_A<3){
+								if(currentVerleih->Ausgabe[2]<32){
+									if (size_hour_A<3){
+										if(currentVerleih->Ausgabe[3]<24){
+											if(currentVerleih->Ausgabe[3]>-1){
+												if(size_min_A < 3){
+													if(currentVerleih->Ausgabe[4]>-1){
+														if(currentVerleih->Ausgabe[4]<60){
+															printf("Datum richtig\n\n");
+														}
+														else{
+															printf("Das Datum ist fehlerhaft!\n\n");
+															exit(0);
+														}			
+													}
+													else{
+														printf("Das Datum ist fehlerhaft!\n\n");
+														exit(0);
+													}			
+												}
+												else{
+													printf("Das Datum ist fehlerhaft!\n\n");
+													exit(0);
+												}			
+											}
+											else{
+												printf("Das Datum ist fehlerhaft!\n\n");
+												exit(0);
+											}							
+						 				}
+										else{
+											printf("Das Datum ist fehlerhaft!\n\n");
+											exit(0);
+										}
+									}
+									else{
+										printf("Das Datum ist fehlerhaft!\n\n");
+										exit(0);
+									}
+										
+								}	
+								else{
+									printf("Das Datum ist fehlerhaft!\n\n");
+									exit (0);
+								}
+							}
+							else{
+								printf("Das Datum ist fehlerhaft!\n\n");
+								exit (0);
+							}
+						}
+						else{
+							printf("Das Datum ist fehlerhaft!\n\n");
+							exit (0);
+						}	
+					}
+					else{
+						printf("Das Datum ist fehlerhaft!\n\n");
+						exit (0);
+					}	
+				}
+				else{
+					printf("Das Datum ist fehlerhaft!\n\n");
+					exit (0);	
+				}	
 			}
+			else{
+				printf("Das Datum ist fehlerhaft!\n\n");
+				exit (0);
+			}	
+		}
+		else{
+			printf("Das Datum ist fehlerhaft!\n\n");
+			exit (0);
 		}
 	}
 	else{
-		printf("Fehler\n\n");
-		
-	}	
-	//gueltigkeit(currentVerleih);
+		printf("Das Datum ist fehlerhaft!\n\n");
+		exit (0);
+	}
 	puts("Rückgabe:\t");
 	for (int i = 0; i < 6; i++){
 		int *rueckgabe_Zeiger = &currentVerleih->Rueckgabe[i];
 		scanf("%d", rueckgabe_Zeiger);
 	}
 	
+	int size_year_R = log10(currentVerleih->Rueckgabe[0])+1;
+	int size_month_R = log10(currentVerleih->Rueckgabe[1])+1;
+	int size_day_R = log10(currentVerleih->Rueckgabe[2])+1;
+	int size_hour_R = log10(currentVerleih->Rueckgabe[3])+1;
+	int size_min_R = log10(currentVerleih->Rueckgabe[4])+1;
 
-	
-		currentVerleih->nextVerleih = NULL;
-		printlist(currentVerleih);
-		return currentVerleih;
+	if (currentVerleih->Rueckgabe[0] > 2019){	
+		/*	
+		if (3 > size_month_R){
+			if(currentVerleih->Rueckgabe[1]< 13){	
+				if (currentVerleih->Rueckgabe[1] > 0){
+					if (size_day_R > 0){
+						if(size_day_R<3){
+						 	if(currentVerleih->Rueckgabe[2]<32){
+								if (size_hour_R<3){
+									if(currentVerleih->Rueckgabe[3]<24){
+										if(currentVerleih->Rueckgabe[3]>-1){
+											if(size_min_R < 3){										
+												if(currentVerleih->Rueckgabe[4]>-1){
+													if(currentVerleih->Rueckgabe[4]<60){
+														printf("Datum richtig\n\n");
+													}
+													else{
+														printf("Das Datum ist fehlerhaft!\n\n");
+														exit(0);
+													}		
+												}
+												else{
+													printf("Das Datum ist fehlerhaft!\n\n");
+													exit(0);
+												}						
+											}
+											else{
+												printf("Das Datum ist fehlerhaft!\n\n");
+												exit(0);
+											}			
+										}
+										else{
+											printf("Das Datum ist fehlerhaft!\n\n");
+											exit(0);
+										}							
+					 				}
+									else{
+										printf("Das Datum ist fehlerhaft!\n\n");
+										exit(0);
+									} 
+								}
+								else{
+									printf("Das Datum ist fehlerhaft!\n\n");
+									exit(0);
+								}
+							}	
+							else{
+								printf("Das Datum ist fehlerhaft!\n\n");
+								exit (0);
+							}	
+						}
+						else{
+							printf("Das Datum ist fehlerhaft!\n\n");
+							exit (0);
+						}
+					}
+					else{
+						printf("Das Datum ist fehlerhaft!\n\n");
+						exit (0);
+					}	
+				}
+				else{
+					printf("Das Datum ist fehlerhaft!\n\n");
+					exit (0);
+				}	
+			}
+			else{
+				printf("Das Datum ist fehlerhaft!\n\n");
+				exit (0);	
+			}	
+		}
+		else{
+			printf("Das Datum ist fehlerhaft!\n\n");
+			exit (0);
+		}	
+		*/		
+	}
+	else{
+		printf("Das Datum ist fehlerhaft!\n\n");
+		exit (0);
+	}
+
+	currentVerleih->nextVerleih = NULL;
+	printlist(currentVerleih);
+	return currentVerleih;	
 }
 
 int einstellungen(int anzahlRad, int eingabe_Menu){
@@ -158,7 +306,6 @@ int main() {
 			
 				tmp=create_new_verleih();
 				tmp->nextVerleih = firstVerleih;
-				//datum_pruefen(firstVerleih);
 				firstVerleih = tmp;
 				printf("Reservierung erfolgreich!\n\n");
 				printf("Zurück zu Hauptmenu Ja/Nein 1/2?");
@@ -195,5 +342,5 @@ int main() {
 		}
 		
 	}
-		return 0;
+	return 0;
 }
